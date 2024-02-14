@@ -12,10 +12,10 @@ router
   .patch(expenditureController.updateExpenditure)
   .delete(expenditureController.deleteExpenditure);
 
-router.route("/:from/:to").get(expenditureController.getAllExpendituresFromTo);
+router.route("/from-to").post(expenditureController.getAllExpendituresFromTo);
 
 router
-  .route("/sum/:from/:to")
-  .get(expenditureController.getAllExpendituresFromToSum);
+  .route("/sum/from-to")
+  .post(expenditureController.getAllExpendituresFromToSum);
 
 module.exports = router;

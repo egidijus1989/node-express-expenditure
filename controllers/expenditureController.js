@@ -23,8 +23,8 @@ exports.getAllExpenditures = async (req, res) => {
 //GetExpendituresByDate\\///////////////////
 exports.getAllExpendituresFromTo = async (req, res) => {
   try {
-    const expenditures = await Expenditure.find({
-      date: { $gte: new Date(req.params.from), $lt: new Date(req.params.to) },
+    let expenditures = await Expenditure.find({
+      date: { $gte: new Date(req.body.from), $lte: new Date(req.body.to) },
     });
     res.status(200).json({
       status: "success",
@@ -43,10 +43,8 @@ exports.getAllExpendituresFromTo = async (req, res) => {
 exports.getAllExpendituresFromToSum = async (req, res) => {
   try {
     const expenditures = await Expenditure.find({
-      date: { $gte: new Date(req.params.from), $lt: new Date(req.params.to) },
+      date: { $gte: new Date(req.body.from), $lte: new Date(req.body.to) },
     });
-    // console.log(expenditures);
-    // console.log(req.params);
     let sum = 0;
     for (const expenditure of expenditures) {
       sum += expenditure.amount;
